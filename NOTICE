@@ -1,0 +1,137 @@
+ZotLit
+Copyright (C) 2022-present AidenLx
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+=========================================================================
+
+This project contains code derived from the following AGPL-3.0-licensed
+projects by the Corporation for Digital Scholarship:
+
+  Zotero — https://github.com/zotero/zotero
+  Zotero Utilities — https://github.com/zotero/utilities
+  Zotero Reader — https://github.com/zotero/reader
+  Zotero Note Editor — https://github.com/zotero/note-editor
+  Zotero Data Server — https://github.com/zotero/dataserver
+
+  Copyright (C) Corporation for Digital Scholarship
+  Licensed under the GNU Affero General Public License, version 3.
+
+Derived files include (non-exhaustive):
+
+  packages/db/src/lib/zt-csl-item.ts    — itemToCSLJSON algorithm
+  packages/db/src/lib/zt-csl-name.ts    — parseParticles algorithm
+  packages/db/src/lib/zt-extra-to-csl.ts — extraToCSL algorithm
+  packages/db/src/lib/zt-lang.ts        — languageToISO6391 algorithm
+  packages/db/src/lib/zt-annot-pos.ts   — annotation position schemas
+  packages/db/src/lib/zt-color.ts       — annotation color palettes
+  packages/db/src/lib/zt-uri.ts         — Item URI and slugify rules
+  packages/db/src/lib/zt-note-mark.ts   — note markup handling
+  packages/item-lookup/src/format-creator.ts — creator name formatting
+  packages/zotero-types/src/keys.ts     — object key validation
+  packages/zotero-types/src/uri.ts      — zotero:// link building
+
+Each file contains @see comments linking to the specific upstream source.
+
+=========================================================================
+
+This project contains a verbatim copy of three modules from Zotero's fork of
+PDF.js, pinned to zotero/pdf.js f57fc80d1c07e4cdc50a767ae0b500b5272123b4
+(zotero/reader 132bb787937a540a09513415fd507654eb0e88f9, zotero/zotero
+22f08d1ceddc8bad5718b3bc6eee9d3ae5dccc2c):
+
+  packages/pdf-structure/src/vendor/structure.js
+  packages/pdf-structure/src/vendor/page-label.js
+  packages/pdf-structure/src/vendor/util.js
+
+  src/core/module/ lives in zotero/pdf.js, an Apache-2.0 submodule of the
+  AGPL-3.0 zotero/reader, so those files are licensed under the Apache
+  License, Version 2.0. A copy of the License is available at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  structure.js additionally carries Mozilla's bidi.js inline, under its own
+  Apache-2.0 notice:
+
+    Copyright 2012 Mozilla Foundation
+
+  Each file repeats this notice and its pinned commits in its header.
+
+=========================================================================
+
+This project contains a vendored build of pdf.js-zotlit, ZotLit's fork of
+Mozilla PDF.js (https://github.com/mozilla/pdf.js), based on PDF.js v6.5.438:
+
+  packages/pdfjs/dist/
+
+  Copyright Mozilla Foundation
+  Licensed under the Apache License, Version 2.0. A copy of the License is
+  in packages/pdfjs/LICENSE.
+
+  The fork modifies PDF.js. packages/pdfjs/provenance.json records the fork
+  commit and tag, each patch, and every modified file.
+
+  The build bundles two image decoders compiled to WebAssembly, each under
+  its own licence:
+
+    JBIG2 decoder (PDFium)   packages/pdfjs/LICENSE_JBIG2,
+                             packages/pdfjs/LICENSE_PDFJS_JBIG2
+    OpenJPEG                 packages/pdfjs/LICENSE_OPENJPEG,
+                             packages/pdfjs/LICENSE_PDFJS_OPENJPEG
+
+  Other files in the build carry their own licences, in the licence files
+  beside them: the QCMS colour library (packages/pdfjs/dist/wasm/), the
+  Foxit and Liberation standard fonts (packages/pdfjs/dist/standard_fonts/)
+  and the CMaps (packages/pdfjs/dist/cmaps/).
+
+=========================================================================
+
+This project contains two unmodified upstream copies. Each folder's
+provenance.json records the upstream commit.
+
+  packages/zotero-types/zotero-schema/schema.json
+    from zotero/zotero-schema — https://github.com/zotero/zotero-schema
+    Copyright (C) Corporation for Digital Scholarship
+
+  packages/pdfjs-dist/types/
+    type definitions generated from Zotero's fork of PDF.js, from
+    zotero-plugin-dev/zotero-pdfjs-types —
+    https://github.com/zotero-plugin-dev/zotero-pdfjs-types
+    PDF.js is licensed under the Apache License, Version 2.0.
+
+=========================================================================
+
+This project also contains code derived from Mozilla web-ext:
+
+  apps/zotero/scripts/dev-server/remote-firefox.ts
+  apps/zotero/scripts/dev-server/rdp-client.ts
+
+  Licensed under the Mozilla Public License 2.0 (MPL-2.0).
+  See SPDX headers in those files for details.
+
+=========================================================================
+
+The Fixture contains third-party copies and adaptations of Sakima's song,
+written by Ursula Nafula and illustrated by Peris Wachuka. These assets are
+licensed under CC BY 4.0 and are outside ZotLit's AGPL-3.0-or-later license
+grant. Full provenance, checksums, and modification records are in:
+
+  packages/scripts/lib/fixture/assets/sakimas-song/NOTICE.md
+
+The Fixture also contains a copy of Why Most Published Research Findings Are
+False, written by John P. A. Ioannidis and published by PLOS. This asset is
+licensed under the Creative Commons Attribution License and is outside ZotLit's
+AGPL-3.0-or-later license grant. Full provenance and its checksum are in:
+
+  packages/scripts/lib/fixture/assets/ioannidis-2005/NOTICE.md

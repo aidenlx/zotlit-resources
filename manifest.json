@@ -1,0 +1,13 @@
+{
+  "id": "zotlit-resources",
+  "name": "ZotLit Resource Pack",
+  "version": "1.0.0-beta.0",
+  "minAppVersion": "1.15.1",
+  "description": "Data files for ZotLit: the Pandoc engine for the built-in export and reference formatting, and the Chinese word segmenter for item search. ZotLit reads them when the pack is installed.",
+  "author": "AidenLx",
+  "authorUrl": "https://github.com/aidenlx",
+  "fundingUrl": {
+    "GitHub Sponsor": "https://github.com/sponsors/aidenlx"
+  },
+  "isDesktopOnly": false
+}

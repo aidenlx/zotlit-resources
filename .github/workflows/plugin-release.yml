@@ -1,0 +1,69 @@
+name: Plugin release
+
+# Releases the plugin when its version tag is pushed. The tag names the
+# commit whose manifest.json carries that version.
+#
+# The official Obsidian action checks the repository, copies main.js from
+# the bundle package, runs the community scanner's lint, attests the build
+# and creates a draft release, which the last step publishes.
+on:
+  push:
+    tags: ["[0-9]*"]
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+
+      # The official action installs with pnpm when it finds pnpm-lock.yaml,
+      # but it does not install pnpm. package.json#packageManager names the
+      # version.
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - uses: obsidianmd/obsidian-workflows@8167caed39664214d82c86fdfa32e06d8d55f61d # v1.2.3
+        with:
+          mode: release
+          strict: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Resolve version
+        id: meta
+        run: |
+          version="$(node -p "require('./manifest.json').version")"
+          if [ "$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::manifest.json names $version, the tag is $GITHUB_REF_NAME"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "name=$(node -p "require('./manifest.json').name")" >> "$GITHUB_OUTPUT"
+          case "$version" in
+            *-*) echo "prerelease=true" >> "$GITHUB_OUTPUT" ;;
+            *) echo "prerelease=false" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      # A pre-release stays off "Latest"; the default branch keeps the
+      # manifest.json of the last stable release.
+      - name: Publish release
+        run: |
+          notes="${{ steps.meta.outputs.name }} v${{ steps.meta.outputs.version }}"
+          gh release edit "${{ steps.meta.outputs.version }}" \
+            --draft=false \
+            --notes "$notes" \
+            ${{ steps.meta.outputs.prerelease == 'true' && '--prerelease --latest=false' || '--latest' }}

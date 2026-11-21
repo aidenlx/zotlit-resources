@@ -1,0 +1,19 @@
+{
+  "name": "zotlit-resources",
+  "version": "1.0.0-beta.0",
+  "private": true,
+  "description": "Data files for ZotLit: the Pandoc engine for the built-in export and reference formatting, and the Chinese word segmenter for item search. ZotLit reads them when the pack is installed.",
+  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aidenlx/zotlit-resources"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "@zotlit/resources-plugin": "1.0.0-beta.0"
+  },
+  "packageManager": "pnpm@12.3.4"
+}
